@@ -405,4 +405,128 @@
     return SSID;
 }
 
++ (NSInteger *)MobileTraffic {
+    
+    NSInteger *MobileTraffic = 0;
+    int mgmtInfoBase[6];
+    char *msgBuffer = NULL;
+    NSString *errorFlag = NULL;
+    
+    size_t length;
+    
+    // Setup the management Information Base (mib)
+    mgmtInfoBase[0] = CTL_NET; // Request network subsystem
+    mgmtInfoBase[1] = AF_ROUTE; // Routing table info
+    mgmtInfoBase[2] = 0;
+    mgmtInfoBase[3] = AF_LINK; // Request link layer information
+    mgmtInfoBase[4] = NET_RT_IFLIST; // Request all configured interfaces
+    
+    
+    if ((mgmtInfoBase[5] = if_nametoindex("pdp_ip0")) == 0)
+        errorFlag = @"if_nametoindex failure";
+    else if (sysctl(mgmtInfoBase, 6, NULL, &length, NULL, 0) < 0)
+        errorFlag = @"sysctl mgmtInfoBase failure";
+    else if ((msgBuffer = malloc(length)) == NULL)
+        errorFlag = @"buffer allocation failure";
+    else if (sysctl(mgmtInfoBase, 6, msgBuffer, &length, NULL, 0) < 0)
+    {
+        free(msgBuffer);
+        errorFlag = @"sysctl msgBuffer failure";
+    }
+    else
+    {
+        struct if_msghdr *interfaceMsgStruct = (struct if_msghdr *) msgBuffer;
+        
+        *MobileTraffic = interfaceMsgStruct->ifm_data.ifi_ibytes+interfaceMsgStruct->ifm_data.ifi_obytes;
+        
+        
+        free(msgBuffer);
+    }
+    
+    return MobileTraffic;
+}
+
++ (NSInteger *)TetheringTraffic {
+    
+    NSInteger *TetheringTraffic = 0;
+    int mgmtInfoBase[6];
+    char *msgBuffer = NULL;
+    NSString *errorFlag = NULL;
+    
+    size_t length;
+    
+    // Setup the management Information Base (mib)
+    mgmtInfoBase[0] = CTL_NET; // Request network subsystem
+    mgmtInfoBase[1] = AF_ROUTE; // Routing table info
+    mgmtInfoBase[2] = 0;
+    mgmtInfoBase[3] = AF_LINK; // Request link layer information
+    mgmtInfoBase[4] = NET_RT_IFLIST; // Request all configured interfaces
+    
+    
+    if ((mgmtInfoBase[5] = if_nametoindex("pdp_ip3")) == 0)
+        errorFlag = @"if_nametoindex failure";
+    else if (sysctl(mgmtInfoBase, 6, NULL, &length, NULL, 0) < 0)
+        errorFlag = @"sysctl mgmtInfoBase failure";
+    else if ((msgBuffer = malloc(length)) == NULL)
+        errorFlag = @"buffer allocation failure";
+    else if (sysctl(mgmtInfoBase, 6, msgBuffer, &length, NULL, 0) < 0)
+    {
+        free(msgBuffer);
+        errorFlag = @"sysctl msgBuffer failure";
+    }
+    else
+    {
+        struct if_msghdr *interfaceMsgStruct = (struct if_msghdr *) msgBuffer;
+        
+        *TetheringTraffic = interfaceMsgStruct->ifm_data.ifi_ibytes+interfaceMsgStruct->ifm_data.ifi_obytes;
+        
+        
+        free(msgBuffer);
+    }
+    
+    return TetheringTraffic;
+}
+
++ (NSInteger *)WiFiTraffic {
+    
+    NSInteger *WiFiTraffic = 0;
+    int mgmtInfoBase[6];
+    char *msgBuffer = NULL;
+    NSString *errorFlag = NULL;
+    
+    size_t length;
+    
+    // Setup the management Information Base (mib)
+    mgmtInfoBase[0] = CTL_NET; // Request network subsystem
+    mgmtInfoBase[1] = AF_ROUTE; // Routing table info
+    mgmtInfoBase[2] = 0;
+    mgmtInfoBase[3] = AF_LINK; // Request link layer information
+    mgmtInfoBase[4] = NET_RT_IFLIST; // Request all configured interfaces
+    
+    
+    if ((mgmtInfoBase[5] = if_nametoindex("en0")) == 0)
+        errorFlag = @"if_nametoindex failure";
+    else if (sysctl(mgmtInfoBase, 6, NULL, &length, NULL, 0) < 0)
+        errorFlag = @"sysctl mgmtInfoBase failure";
+    else if ((msgBuffer = malloc(length)) == NULL)
+        errorFlag = @"buffer allocation failure";
+    else if (sysctl(mgmtInfoBase, 6, msgBuffer, &length, NULL, 0) < 0)
+    {
+        free(msgBuffer);
+        errorFlag = @"sysctl msgBuffer failure";
+    }
+    else
+    {
+        struct if_msghdr *interfaceMsgStruct = (struct if_msghdr *) msgBuffer;
+        
+        *WiFiTraffic = interfaceMsgStruct->ifm_data.ifi_ibytes+interfaceMsgStruct->ifm_data.ifi_obytes;
+        
+        
+        free(msgBuffer);
+    }
+    
+    return WiFiTraffic;
+}
+
+
 @end

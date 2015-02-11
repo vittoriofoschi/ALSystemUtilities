@@ -129,6 +129,9 @@ Now I'll explain you what informations are contained for every purview.
 - ```+ (NSString *)WiFiBroadcastAddress;```
 - ```+ (NSString *)BSSID;```
 - ```+ (NSString *)SSID;```
+- ```+ (NSInteger *)MobileTraffic;```
+- ```+ (NSInteger *)TetheringTraffic;```
+- ```+ (NSInteger *)WiFiTraffic;```
 
 *Processor*
 

@@ -77,17 +77,17 @@
  The 3g/4g traffic since boot of device
  @return NSInteger represents the traffic
  */
-+ (NSInteger *)MobileTraffic;
++ (NSInteger )MobileTraffic;
 
 /*!
  The Tethering traffic since boot of device
  @return NSInteger represents the traffic
  */
-+ (NSInteger *)TetheringTraffic;
++ (NSInteger )TetheringTraffic;
 
 /*!
  The WiFi traffic since boot of device
  @return NSInteger represents the traffic
  */
-+ (NSInteger *)WiFiTraffic;
++ (NSInteger )WiFiTraffic;
 @end

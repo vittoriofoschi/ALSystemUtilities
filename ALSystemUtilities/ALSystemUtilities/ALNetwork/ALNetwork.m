@@ -405,9 +405,9 @@
     return SSID;
 }
 
-+ (NSInteger *)MobileTraffic {
++ (NSInteger )MobileTraffic {
     
-    NSInteger *MobileTraffic = 0;
+    NSInteger MobileTraffic = 0;
     int mgmtInfoBase[6];
     char *msgBuffer = NULL;
     NSString *errorFlag = NULL;
@@ -437,7 +437,7 @@
     {
         struct if_msghdr *interfaceMsgStruct = (struct if_msghdr *) msgBuffer;
         
-        *MobileTraffic = interfaceMsgStruct->ifm_data.ifi_ibytes+interfaceMsgStruct->ifm_data.ifi_obytes;
+        MobileTraffic = interfaceMsgStruct->ifm_data.ifi_ibytes+interfaceMsgStruct->ifm_data.ifi_obytes;
         
         
         free(msgBuffer);
@@ -446,9 +446,9 @@
     return MobileTraffic;
 }
 
-+ (NSInteger *)TetheringTraffic {
++ (NSInteger )TetheringTraffic {
     
-    NSInteger *TetheringTraffic = 0;
+    NSInteger TetheringTraffic = 0;
     int mgmtInfoBase[6];
     char *msgBuffer = NULL;
     NSString *errorFlag = NULL;
@@ -478,7 +478,7 @@
     {
         struct if_msghdr *interfaceMsgStruct = (struct if_msghdr *) msgBuffer;
         
-        *TetheringTraffic = interfaceMsgStruct->ifm_data.ifi_ibytes+interfaceMsgStruct->ifm_data.ifi_obytes;
+        TetheringTraffic = interfaceMsgStruct->ifm_data.ifi_ibytes+interfaceMsgStruct->ifm_data.ifi_obytes;
         
         
         free(msgBuffer);
@@ -487,9 +487,9 @@
     return TetheringTraffic;
 }
 
-+ (NSInteger *)WiFiTraffic {
++ (NSInteger )WiFiTraffic {
     
-    NSInteger *WiFiTraffic = 0;
+    NSInteger WiFiTraffic = 0;
     int mgmtInfoBase[6];
     char *msgBuffer = NULL;
     NSString *errorFlag = NULL;
@@ -519,7 +519,7 @@
     {
         struct if_msghdr *interfaceMsgStruct = (struct if_msghdr *) msgBuffer;
         
-        *WiFiTraffic = interfaceMsgStruct->ifm_data.ifi_ibytes+interfaceMsgStruct->ifm_data.ifi_obytes;
+        WiFiTraffic = interfaceMsgStruct->ifm_data.ifi_ibytes+interfaceMsgStruct->ifm_data.ifi_obytes;
         
         
         free(msgBuffer);
